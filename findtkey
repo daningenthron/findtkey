@@ -1,0 +1,9 @@
+#!/bin/bash
+# Locate t(:foo) Transifex keys that do not have matches in the en.yml file.
+
+grep -onEri '[^a-zA-Z]t\(.+?\)' . | while read line
+do
+	A=$(echo "$line" | cut -d':' -f1,2)
+	B=$(echo "$line" | cut -d':' -f3- | sed 's/^.//')
+	echo -e "$A \t $B"
+done
